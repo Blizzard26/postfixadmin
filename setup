@@ -16,6 +16,6 @@ while [ ${#HASH} -ne 73 ]; do
   echo ""
 done
 
-sed -i "s|\($CONF\['setup_password'\].*=\).*|\1 '${HASH}';|" /postfixadmin/config.inc.php
+sed -i "s|\($CONF\['setup_password'\].*=\).*|\1 '${HASH}';|" /postfixadmin/conf/config.local.php
 
 echo -e "${CGREEN}Setup done.${CEND}"

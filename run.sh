@@ -20,6 +20,7 @@ if [ ! -f "/postfixadmin/conf/config.local.php" ]; then
 <?php
 
 \$CONF['configured'] = true;
+\$CONF['setup_password'] = 'changeme';
 
 \$CONF['database_type'] = 'mysqli';
 \$CONF['database_host'] = '${DBHOST}';
