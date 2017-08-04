@@ -5,19 +5,18 @@ export DOMAIN
 
 DOMAIN=${DOMAIN:-$(hostname --domain)}
 
-if [ -z "$DBPASS" ]; then
-  echo "Mariadb database password must be set !"
-  exit 1
-fi
-
 # Create smarty cache folder
 mkdir -p /postfixadmin/templates_c
 
-# Set permissions
-chown -R $UID:$GID /postfixadmin /etc/nginx /etc/php7 /var/log /var/lib/nginx /tmp /etc/s6.d
+if [ ! -f "/postfixadmin/conf/config.local.php" ]; then
 
-# Local postfixadmin configuration file
-cat > /postfixadmin/conf/config.local.php <<EOF
+  if [ -z "$DBPASS" ]; then
+    echo "Mariadb database password must be set !"
+    exit 1
+  fi
+
+  # Local postfixadmin configuration file
+  cat > /postfixadmin/conf/config.local.php <<EOF
 <?php
 
 \$CONF['configured'] = true;
@@ -59,6 +58,12 @@ cat > /postfixadmin/conf/config.local.php <<EOF
 \$CONF['domain_quota_default'] = '0';
 ?>
 EOF
+
+fi
+
+# Set permissions
+chown -R $UID:$GID /postfixadmin /etc/nginx /etc/php7 /var/log /var/lib/nginx /tmp /etc/s6.d
+
 
 # RUN !
 exec su-exec $UID:$GID /bin/s6-svscan /etc/s6.d
