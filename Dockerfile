@@ -59,6 +59,8 @@ RUN sed -i "s|dirname(__FILE__) \. '/config.local.php'|dirname(__FILE__) . '/con
 
 RUN chmod +x /usr/local/bin/* /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
 
+VOLUME /postfixadmin/conf
+
 EXPOSE 8888
 
 CMD ["run.sh"]
