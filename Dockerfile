@@ -54,6 +54,9 @@ COPY setup /usr/local/bin/setup
 COPY s6.d /etc/s6.d
 COPY run.sh /usr/local/bin/run.sh
 
+RUN mkdir -p /postfixadmin/conf 
+RUN sed -i "s|dirname(__FILE__) \. '/config.local.php'|dirname(__FILE__) . '/conf/config.local.php'|" /postfixadmin/config.inc.php
+
 RUN chmod +x /usr/local/bin/* /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
 
 EXPOSE 8888

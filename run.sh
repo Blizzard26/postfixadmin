@@ -17,7 +17,7 @@ mkdir -p /postfixadmin/templates_c
 chown -R $UID:$GID /postfixadmin /etc/nginx /etc/php7 /var/log /var/lib/nginx /tmp /etc/s6.d
 
 # Local postfixadmin configuration file
-cat > /postfixadmin/config.local.php <<EOF
+cat > /postfixadmin/conf/config.local.php <<EOF
 <?php
 
 \$CONF['configured'] = true;
